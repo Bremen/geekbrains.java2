@@ -7,13 +7,23 @@ public class Robot extends Competitor {
 
     @Override
     public boolean jump(int neededJumpHeight) {
-        System.out.printf("Robot: " + jumpingReport(neededJumpHeight) + "\n");
+        addTitleToPassageLogIfWasNot();
+        addReportToLog(jumpingReport(neededJumpHeight) + "\n");
+
         return isAbleToJump(neededJumpHeight);
     }
 
     @Override
     public boolean run(int neededRunLength) {
-        System.out.printf("Robot: " + runningReport(neededRunLength) + "\n");
+        addTitleToPassageLogIfWasNot();
+        addReportToLog(runningReport(neededRunLength) + "\n");
+
         return isAbleToRun(neededRunLength);
+    }
+
+    private void addTitleToPassageLogIfWasNot() {
+        if (getPassageLog().isEmpty()) {
+            addReportToLog("Robot - " + name + " results:\n");
+        }
     }
 }

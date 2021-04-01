@@ -8,6 +8,9 @@ public abstract class Competitor implements CanJump, CanRun {
     protected int jumpAbility;
     protected int runAbility;
 
+    private String passageLog = "";
+    private boolean finished;
+
     public Competitor(String name, int jumpAbility, int runAbility) {
         this.name = name;
         this.jumpAbility = jumpAbility;
@@ -29,7 +32,7 @@ public abstract class Competitor implements CanJump, CanRun {
             actionReport = "не ";
         }
 
-        return name + " " + actionReport + "перепрыгнул препятствие высотой " + neededJumpHeight;
+        return actionReport + "перепрыгнул препятствие высотой " + neededJumpHeight;
     }
 
     protected String runningReport(final int neededRunLength) {
@@ -39,10 +42,31 @@ public abstract class Competitor implements CanJump, CanRun {
             actionReport = "не ";
         }
 
-        return name + " " + actionReport + "пробежал препятствие длинной " + neededRunLength;
+        return actionReport + "пробежал препятствие длинной " + neededRunLength;
+    }
+
+    public void addReportToLog(String report) {
+        passageLog += report;
+    }
+
+    public void resetResults() {
+        finished = false;
+        passageLog = "";
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getPassageLog() {
+        return passageLog;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 }

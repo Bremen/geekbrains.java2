@@ -5,15 +5,26 @@ public class Human extends Competitor {
         super(name, jumpAbility, runAbility);
     }
 
+
     @Override
     public boolean jump(int neededJumpHeight) {
-        System.out.printf("Human: " + jumpingReport(neededJumpHeight) + "\n");
+        addTitleToPassageLogIfWasNot();
+        addReportToLog(jumpingReport(neededJumpHeight) + "\n");
+
         return isAbleToJump(neededJumpHeight);
     }
 
     @Override
     public boolean run(int neededRunLength) {
-        System.out.printf("Human: " + runningReport(neededRunLength) + "\n");
+        addTitleToPassageLogIfWasNot();
+        addReportToLog(runningReport(neededRunLength) + "\n");
+
         return isAbleToRun(neededRunLength);
+    }
+
+    private void addTitleToPassageLogIfWasNot() {
+        if (getPassageLog().isEmpty()) {
+            addReportToLog("Human - " + name + " results:\n");
+        }
     }
 }
