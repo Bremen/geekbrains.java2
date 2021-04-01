@@ -7,29 +7,13 @@ public class Cat extends Competitor{
 
     @Override
     public boolean jump(int neededJumpHeight) {
-        String actionReport = "не перепрыгнул";
-
-        if (isJumped(neededJumpHeight)) {
-            actionReport = "перепрыгнул";
-        }
-
-        System.out.printf("Cat: " + name + "%s препятствие длиной " + jumpAbility, actionReport);
-
-        return isJumped(neededJumpHeight);
+        System.out.printf("Cat: " + jumpingReport(neededJumpHeight) + "\n");
+        return isAbleToJump(neededJumpHeight);
     }
 
     @Override
     public boolean run(int neededRunLength) {
-        boolean didIt = false;
-        String actionReport = "не пробежал";
-
-        if (runAbility >= neededRunLength) {
-            didIt = true;
-            actionReport = "пробежал";
-        }
-
-        System.out.printf("Cat: " + name + "%s препятствие длиной " + runAbility, actionReport);
-
-        return didIt;
+        System.out.printf("Cat: " + runningReport(neededRunLength) + "\n");
+        return isAbleToRun(neededRunLength);
     }
 }

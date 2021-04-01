@@ -5,14 +5,15 @@ public class Robot extends Competitor {
         super(name, jumpAbility, runAbility);
     }
 
-
     @Override
     public boolean jump(int neededJumpHeight) {
-        return false;
+        System.out.printf("Robot: " + jumpingReport(neededJumpHeight) + "\n");
+        return isAbleToJump(neededJumpHeight);
     }
 
     @Override
     public boolean run(int neededRunLength) {
-        return false;
+        System.out.printf("Robot: " + runningReport(neededRunLength) + "\n");
+        return isAbleToRun(neededRunLength);
     }
 }

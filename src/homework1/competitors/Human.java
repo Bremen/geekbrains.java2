@@ -1,18 +1,19 @@
 package homework1.competitors;
 
 public class Human extends Competitor {
-    Human(String name, int jumpAbility, int runAbility) {
+    public Human(String name, int jumpAbility, int runAbility) {
         super(name, jumpAbility, runAbility);
     }
 
-
     @Override
     public boolean jump(int neededJumpHeight) {
-        return false;
+        System.out.printf("Human: " + jumpingReport(neededJumpHeight) + "\n");
+        return isAbleToJump(neededJumpHeight);
     }
 
     @Override
     public boolean run(int neededRunLength) {
-        return false;
+        System.out.printf("Human: " + runningReport(neededRunLength) + "\n");
+        return isAbleToRun(neededRunLength);
     }
 }

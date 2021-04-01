@@ -35,8 +35,45 @@ package homework1;
 //        team.showResults(); // Показываем результаты
 //        }
 
+import homework1.competitors.Cat;
+import homework1.competitors.Competitor;
+import homework1.competitors.Human;
+import homework1.competitors.Robot;
+import homework1.interfaces.Obstacle;
+import homework1.obstacles.Track;
+import homework1.obstacles.Wall;
+
 public class HomeWork1 {
     public static void demonstrate() {
-        System.out.println("DEMO");
+        int obstaclesCount = 6;
+        Obstacle[] obstacles = new Obstacle[obstaclesCount];
+
+        obstacles[0] = new Wall(10);
+        obstacles[1] = new Track(10);
+        obstacles[2] = new Wall(20);
+        obstacles[3] = new Track(20);
+        obstacles[4] = new Wall(30);
+        obstacles[5] = new Track(30);
+
+        int competitorsCount = 3;
+        Competitor[] competitors = new Competitor[competitorsCount];
+
+        competitors[0] = new Cat("Барсик", 20, 10);
+        competitors[1] = new Robot("R2D2", 10, 30);
+        competitors[2] = new Human("Karl", 30, 30);
+
+        nextCompetitor:
+        for (int i = 0; i < competitors.length; i++) {
+            for (int j = 0; j < obstacles.length; j++) {
+                boolean notOvercame = !obstacles[j].doIt(competitors[i]);
+
+                if (notOvercame) {
+                    System.out.println("Участник " + competitors[i].getName() + " сошёл с дистанции.\n");
+                    continue nextCompetitor;
+                }
+            }
+
+            System.out.println("Участник " + competitors[i].getName() + " успешно финишировал.\n");
+        }
     }
 }

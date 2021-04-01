@@ -14,11 +14,35 @@ public abstract class Competitor implements CanJump, CanRun {
         this.runAbility = runAbility;
     }
 
-    protected boolean isJumped(final int height) {
-        return jumpAbility >= height;
+    protected boolean isAbleToJump(final int neededJumpHeight) {
+        return jumpAbility >= neededJumpHeight;
     }
 
-    protected boolean isRunned(final int length) {
+    protected boolean isAbleToRun(final int length) {
         return runAbility >= length;
+    }
+
+    protected String jumpingReport(final int neededJumpHeight) {
+        String actionReport = "";
+
+        if (!isAbleToJump(neededJumpHeight)) {
+            actionReport = "не ";
+        }
+
+        return name + " " + actionReport + "перепрыгнул препятствие высотой " + neededJumpHeight;
+    }
+
+    protected String runningReport(final int neededRunLength) {
+        String actionReport = "";
+
+        if (!isAbleToRun(neededRunLength)) {
+            actionReport = "не ";
+        }
+
+        return name + " " + actionReport + "пробежал препятствие длинной " + neededRunLength;
+    }
+
+    public String getName() {
+        return name;
     }
 }
