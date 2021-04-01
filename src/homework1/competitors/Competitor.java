@@ -4,13 +4,21 @@ import homework1.interfaces.CanJump;
 import homework1.interfaces.CanRun;
 
 public abstract class Competitor implements CanJump, CanRun {
-    private String name;
-    private int jumpAbility;
-    private int runAbility;
+    protected String name;
+    protected int jumpAbility;
+    protected int runAbility;
 
     public Competitor(String name, int jumpAbility, int runAbility) {
         this.name = name;
         this.jumpAbility = jumpAbility;
         this.runAbility = runAbility;
+    }
+
+    protected boolean isJumped(final int height) {
+        return jumpAbility >= height;
+    }
+
+    protected boolean isRunned(final int length) {
+        return runAbility >= length;
     }
 }

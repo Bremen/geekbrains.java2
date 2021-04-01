@@ -5,13 +5,14 @@ public class Human extends Competitor {
         super(name, jumpAbility, runAbility);
     }
 
-    @Override
-    public void jump() {
 
+    @Override
+    public boolean jump(int neededJumpHeight) {
+        return false;
     }
 
     @Override
-    public void run() {
-
+    public boolean run(int neededRunLength) {
+        return false;
     }
 }
