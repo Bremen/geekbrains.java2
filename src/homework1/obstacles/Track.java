@@ -11,7 +11,7 @@ public class Track implements Obstacle {
     }
 
     @Override
-    public boolean doIt(Competitor competitor) {
-        return competitor.run(length);
+    public void overcomeBy(Competitor competitor) {
+        competitor.run(length);
     }
 }

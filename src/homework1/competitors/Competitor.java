@@ -4,69 +4,67 @@ import homework1.interfaces.CanJump;
 import homework1.interfaces.CanRun;
 
 public abstract class Competitor implements CanJump, CanRun {
-    protected String name;
-    protected int jumpAbility;
-    protected int runAbility;
+    private int jumpLimit;
+    private int runLimit;
 
-    private String passageLog = "";
-    private boolean finished;
+    private StringBuilder passageLog = new StringBuilder();
+    private boolean onDistance;
 
-    public Competitor(String name, int jumpAbility, int runAbility) {
-        this.name = name;
-        this.jumpAbility = jumpAbility;
-        this.runAbility = runAbility;
+    Competitor(String name, int jumpAbility, int runAbility) {
+        this.jumpLimit = jumpAbility;
+        this.runLimit = runAbility;
+        this.onDistance = true;
+
+        addReportToLog(getClass().getSimpleName() + " - " + name + " results:\n");
     }
 
-    protected boolean isAbleToJump(final int neededJumpHeight) {
-        return jumpAbility >= neededJumpHeight;
+    private boolean isAbleToJump(int neededJumpHeight) {
+        return jumpLimit >= neededJumpHeight;
     }
 
-    protected boolean isAbleToRun(final int length) {
-        return runAbility >= length;
-    }
-
-    protected String jumpingReport(final int neededJumpHeight) {
-        String actionReport = "";
-
-        if (!isAbleToJump(neededJumpHeight)) {
-            actionReport = "не ";
-        }
-
-        return actionReport + "перепрыгнул препятствие высотой " + neededJumpHeight;
-    }
-
-    protected String runningReport(final int neededRunLength) {
-        String actionReport = "";
-
-        if (!isAbleToRun(neededRunLength)) {
-            actionReport = "не ";
-        }
-
-        return actionReport + "пробежал препятствие длинной " + neededRunLength;
+    private boolean isAbleToRun(int length) {
+        return runLimit >= length;
     }
 
     public void addReportToLog(String report) {
-        passageLog += report;
+        passageLog.append(report);
     }
 
-    public void resetResults() {
-        finished = false;
-        passageLog = "";
+    String getPassageLog() {
+        return passageLog.toString();
     }
 
-    public String getName() {
-        return name;
+    public boolean isOnDistance() {
+        return onDistance;
     }
 
-    public String getPassageLog() {
-        return passageLog;
+    @Override
+    public String toString() {
+        return passageLog.toString();
     }
 
-    public boolean isFinished() {
-        return finished;
+    @Override
+    public void jump(int neededJumpHeight) {
+        onDistance = isAbleToJump(neededJumpHeight);
+
+        StringBuilder report = new StringBuilder("перепрыгнул препятствие высотой " + neededJumpHeight + "\n");
+        reportEvent(report);
     }
 
-    public void setFinished(boolean finished) {
-        this.finished = finished;
+    @Override
+    public void run(int neededRunLength) {
+        onDistance = isAbleToRun(neededRunLength);
+
+        StringBuilder report = new StringBuilder("пробежал препятствие длинной " + neededRunLength + "\n");
+        reportEvent(report);
+    }
+
+    private void reportEvent(StringBuilder report) {
+        if (!onDistance) {
+            report.insert(0, "не ");
+            report.append("Cошёл с дистанции.\n");
+        }
+
+        addReportToLog(report.toString());
     }
 }

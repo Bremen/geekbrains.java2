@@ -11,7 +11,7 @@ public class Wall implements Obstacle {
     }
 
     @Override
-    public boolean doIt(Competitor competitor) {
-        return competitor.jump(height);
+    public void overcomeBy(Competitor competitor) {
+        competitor.jump(height);
     }
 }

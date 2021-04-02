@@ -1,5 +1,7 @@
 package homework1.competitors;
 
+import java.util.Arrays;
+
 public class Team {
     private String name;
     private Competitor[] competitors;
@@ -7,14 +9,6 @@ public class Team {
     public Team(String name, Competitor... competitors) {
         this.name = name;
         this.competitors = competitors;
-    }
-
-    public int getCompetitorsCount() {
-        return competitors.length;
-    }
-
-    public Competitor getCompetitorAt(int i) {
-        return competitors[i];
     }
 
     public void printCompetitorsResultsAll() {
@@ -26,21 +20,10 @@ public class Team {
 
     public void printCompetitorsResultsFinished() {
         System.out.println("Результаты финишировавших членов команды " + name + ":");
-        for (Competitor competitor : competitors) {
-            if (competitor.isFinished()) {
-                System.out.println(competitor.getPassageLog());
-            }
-        }
+        Arrays.stream(competitors).filter(Competitor::isOnDistance).forEach(System.out::println);
     }
 
-    public static Team getDemoTeam() {
-        Team demoTeam = new Team("DemoTeam",
-                new Cat("Барсик", 20, 10),
-                new Robot("R2D2", 10, 30),
-                new Human("Karl", 20, 20),
-                new Human("SuperKarl", 30, 30)
-        );
-
-        return demoTeam;
+    public final Competitor[] getCompetitors() {
+        return competitors;
     }
 }
