@@ -17,6 +17,9 @@ public class Main {
     private static final int EXPECTED_SIZE = 4;
 
     public static void main(String[] args) {
+        
+
+
         String[][] strMatrixNormal = {{"1", "2", "3", "4"},
                 {"5", "6", "7", "2"},
                 {"9", "0", "1", "0"},
