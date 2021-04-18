@@ -20,7 +20,6 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-
         // 1.
         String[] strArr = {"A", "A", "B", "A", "B", "C", "A", "B", "C", "D", "A", "B", "C", "D", "E"};
         System.out.println("Массив: " + Arrays.toString(strArr));

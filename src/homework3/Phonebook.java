@@ -10,9 +10,10 @@ public class Phonebook {
     }
 
     void add(String name, String phone) {
-        Set<String> numbers = map.getOrDefault(name, new HashSet<>());
-        numbers.add(phone);
-        map.put(name, numbers);
+        if (!map.containsKey(name)) {
+            map.put(name, new HashSet<>());
+        }
+        map.get(name).add(phone);
     }
 
     @Override
